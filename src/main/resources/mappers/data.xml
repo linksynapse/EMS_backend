@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="Data">
+	<select id="_0001" resultType="com.rest.api.object.Company">
+		SELECT A.pKey AS Nonce,
+		A.Name,
+		IFNULL(A.UEN,"") AS UEN,
+		C.keyName AS TypeOfWork,
+		COUNT(B.PassNo) AS TotalEmployee
+		FROM `Users.Company` AS A
+		LEFT JOIN Users AS B
+		ON A.pKey = B.Company
+		LEFT JOIN `Users.Company.Tow` AS C
+		ON A.TypeOfWork = C.pKey
+		WHERE A.Name LIKE CONCAT('%',#{Name},'%')
+		AND IFNULL(A.UEN,"") LIKE CONCAT('%',#{UEN},'%')
+		AND C.keyName LIKE CONCAT('%',#{TypeOfWork},'%')
+		GROUP BY A.pKey
+	</select>
+	
+	<select id="_0002" resultType="com.rest.api.object.Employee">
+		SELECT PassNo, 
+		Permition AS CompanyRole, 
+		Name,
+		IFNULL(Mobile,"") AS Mobile,
+		IFNULL(Occupation, "") AS Occupation,
+		IFNULL(Email, "") AS Email,
+		NRIC,
+		Category,
+		Company,
+		IFNULL(Nationality, "") AS Nationality,
+		IFNULL(DateOfSIC, "") AS DateOfSIC,
+		CSOC,
+		IFNULL(CSOC_ExpireDate, "") AS CSOC_ExpireDate,
+		IFNULL(Remark, "") AS Remark,
+		AdditionalCourse,
+		IFNULL(AdditionalCourseFrom, "") AS AdditionalCourseFrom,
+		IFNULL(AdditionalCourseTo, "") AS AdditionalCourseTo
+		FROM `Users`
+		WHERE PassNo = ${PassNo}
+	</select>
+	
+	<select id="_0003" resultType="com.rest.api.object.keyDict">
+		SELECT pKey AS Nonce, keyName AS Name
+		FROM `Users.Company.Tow`
+	</select>
+	
+	<select id="_0004" resultType="com.rest.api.object.keyDict">
+		SELECT pKey AS Nonce,
+		keyName AS Name
+		FROM `Users.AdditionalCourse`
+	</select>
+	
+	<select id="_0005" resultType="com.rest.api.object.keyDict">
+		SELECT pKey AS Nonce,
+		keyName AS Name
+		FROM `Users.Permit`;
+	</select>
+	
+	<delete id="_0006">
+		DELETE FROM `Users.Company` WHERE pKey = ${Nonce}
+	</delete>
+	
+	<insert id="_0007">
+		INSERT INTO `Users.Company` VALUES (NULL, #{UEN}, ${TypeOfWork}, #{Name})
+	</insert>
+	
+	<update id="_0008">
+		UPDATE `Users.Company` SET UEN = #{UEN}, TypeOfWork = ${TypeOfWork}, Name = #{Name} WHERE pKey = #{Nonce}
+	</update>
+	
+	<select id="_0009" resultType="com.rest.api.object.EmployeeOmit">
+		SELECT A.PassNo, A.Name, B.Name AS CompanyName, A.NRIC,
+		IFNULL(A.Occupation, "") AS Occupation, IFNULL(A.Nationality, "") AS Nationality, IFNULL(A.Mobile, "") AS Mobile, IFNULL(A.Remark, "") AS Remark
+		FROM `Users` AS A
+		LEFT JOIN `Users.Company` AS B
+		ON A.Company = B.pKey
+		WHERE A.Name LIKE CONCAT('%',#{Name},'%')
+		AND A.NRIC LIKE CONCAT('%',#{NRIC},'%')
+		AND B.pKey IN 
+		<foreach item="item" collection="CompanyList" index="index" open="(" separator="," close=")">
+			${item}
+		</foreach>
+	</select>
+	
+	<select id="_0010" resultType="com.rest.api.object.keyDict">
+		SELECT pKey AS Nonce,
+		keyName AS Name
+		FROM `Users.Category`;
+	</select>
+	
+	<insert id="_0011">
+		INSERT INTO `Users` (Permition,Name,Mobile,Occupation,Email,NRIC,Category,Company,Nationality,DateOfSIC,CSOC,CSOC_ExpireDate,Remark,AdditionalCourse,AdditionalCourseFrom,AdditionalCourseTo)
+		VALUES (${CompanyRole},#{Name},#{Mobile},#{Occupation},#{Email},#{NRIC},${Category},${Company},#{Nationality},#{DateOfSIC},${CSOC},#{CSOC_ExpireDate},#{Remark},${AdditionalCourse},#{AdditionalCourseFrom},#{AdditionalCourseTo});
+	</insert>
+	
+	<insert id="_0012">
+		INSERT INTO `Users.Files` (FileName,ContentType,`Data`,`User`,`UserNRIC`,ContentsCategory)
+		VALUES (#{FileName},#{ContentType},#{Data},(SELECT PassNo FROM `Users` WHERE NRIC = #{NRIC}),#{NRIC},${Category})
+	</insert>
+	
+	<delete id="_0013">
+		DELETE FROM `Users.Files` WHERE User = ${PassNo}
+	</delete>
+	
+	<delete id="_0014">
+		DELETE FROM `Users` WHERE PassNo = ${PassNo}
+	</delete>
+	
+	<select id="_0015" resultType="com.rest.api.object.Resource">
+		SELECT FileName AS Name, ContentType, Data
+		FROM `Users.Files`
+		WHERE pKey = ${Idx}
+	</select>
+	
+	<select id="_0016" resultType="com.rest.api.object.keyDict">
+		SELECT pKey AS Nonce, FileName AS Name FROM `Users.Files`
+		WHERE User = ${PassNo}
+		AND ContentsCategory = 1
+	</select>
+	
+	<select id="_0017" resultType="com.rest.api.object.keyDict">
+		SELECT pKey AS Nonce, FileName AS Name FROM `Users.Files`
+		WHERE User = ${PassNo}
+		AND ContentsCategory = 0
+	</select>
+	
+	<select id="_0018" resultType="com.rest.api.object.EpassCard">
+		SELECT A.Name, A.NRIC, A.Occupation, B.Name AS Company, IFNULL(A.DateOfSIC, "") AS DateOfSIC , A.Category, A.PassNo, IFNULL(C.pKey, 0) AS Profile FROM `Users` AS A
+		LEFT JOIN `Users.Company` AS B
+		ON A.Company = B.pKey
+		LEFT JOIN `Users.Files` AS C
+		ON A.PassNo = C.User AND C.ContentsCategory = 1
+		WHERE A.PassNo = ${PassNo}
+	</select>
+	
+	<delete id="_0019">
+		DELETE FROM `Users.Files` WHERE User = ${PassNo} AND ContentsCategory = 1
+	</delete>
+	
+	<update id="_0020">
+		UPDATE `Users` SET Permition = ${CompanyRole}, Name = #{Name}, Mobile = #{Mobile}, Occupation = #{Occupation}, Email = #{Email}, NRIC = #{NRIC}, Category = ${Category},
+		Company = ${Company}, Nationality = #{Nationality}, DateOfSIC = #{DateOfSIC}, Remark = #{Remark}
+		WHERE PassNo = ${PassNo}
+	</update>
+</mapper>

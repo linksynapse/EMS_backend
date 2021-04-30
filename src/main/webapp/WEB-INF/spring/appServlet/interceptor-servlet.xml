@@ -10,14 +10,16 @@
     <interceptors>
        <interceptor>
        <mapping path="/manage"/>
-       <mapping path="/getCompany"/>
-       <mapping path="/addUser"/>
-       <mapping path="/addCompany"/>
-       <mapping path="/delCompany"/>
-       <mapping path="/delUser"/>
-       <mapping path="/addImage"/>
-       <mapping path="/getUser"/>
-       <mapping path="/editUser"/>
+       <mapping path="/authentification/logout"/>
+       <mapping path="/inform/getCompany"/>
+       <mapping path="/inform/getEmployee"/>
+       <mapping path="/inform/getEmployeeOmit"/>
+       <mapping path="/inform/getTypeOfWork"/>
+       <mapping path="/inform/getCompanyRole"/>
+       <mapping path="/inform/getAdditionalCourse"/>
+       <mapping path="/update/CreateCompany"/>
+       <mapping path="/update/deleteCompany"/>
+       <mapping path="/update/modifyCompany"/>
        <beans:bean id="commonInterceptor" class="com.rest.api.controller.AuthInterceptor"/>
        </interceptor>
     </interceptors>

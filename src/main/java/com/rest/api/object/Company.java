@@ -1,32 +1,43 @@
 package com.rest.api.object;
 
 public class Company {
-	String CompanyName;
+	int Nonce;
+	String Name;
 	String UEN;
 	String TypeOfWork;
-	int EmployeeOnProject;
-	public String getCompanyName() {
-		return CompanyName;
+	int TotalEmployee;
+	public int getTotalEmployee() {
+		return TotalEmployee;
 	}
-	public void setCompanyName(String companyName) {
-		CompanyName = companyName;
+	public void setTotalEmployee(int totalEmployee) {
+		TotalEmployee = totalEmployee;
+	}
+	public int getNonce() {
+		return Nonce;
+	}
+	public void setNonce(int nonce) {
+		Nonce = nonce;
+	}
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		Name = name;
 	}
 	public String getUEN() {
 		return UEN;
 	}
 	public void setUEN(String uEN) {
-		UEN = uEN;
+		if(uEN == "") {
+			UEN = null;
+		}else {
+			UEN = uEN;
+		}
 	}
 	public String getTypeOfWork() {
 		return TypeOfWork;
 	}
 	public void setTypeOfWork(String typeOfWork) {
 		TypeOfWork = typeOfWork;
-	}
-	public int getEmployeeOnProject() {
-		return EmployeeOnProject;
-	}
-	public void setEmployeeOnProject(int employeeOnProject) {
-		EmployeeOnProject = employeeOnProject;
 	}
 }

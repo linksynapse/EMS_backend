@@ -8,29 +8,35 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.rest.api.object.*;
-
 public class AuthInterceptor extends HandlerInterceptorAdapter{
 	
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse response, Object handler) throws Exception {
-		
-		WebAccount vo = null;
-		
 		try 
 		{
 			HttpSession Session = req.getSession();
-			vo = (WebAccount)Session.getAttribute("UserProfile");
 			
-			if(vo != null) {
-				return true;
+			if(Session.getAttribute("IsAlived") != null || (Boolean)Session.getAttribute("IsAlived")) {
+				if(Integer.valueOf(Session.getAttribute("Permition").toString()) < 2) {
+					return true;
+				}else {
+					System.out.println("==========Permition Deny==========");
+					System.out.println("IsAlived : " + Session.getAttribute("IsAlived").toString());
+					System.out.println("Permition : " + Session.getAttribute("Permition").toString());
+					
+					throw new Exception("Require Permition");
+				}
 			} else {
+				System.out.println("==========Session Deny==========");
 				throw new Exception("Require Login");
 			}
 		}
 		catch(Exception e)
 		{
-			ModelAndView modelAndView = new ModelAndView("redirect:/");
+			HttpSession Session = req.getSession();
+			System.out.println("==========Session Deny==========");
+			System.out.println(e.toString());
+			ModelAndView modelAndView = new ModelAndView("redirect:/error/requireLogin");
             throw new ModelAndViewDefiningException(modelAndView);
 		}
 	}

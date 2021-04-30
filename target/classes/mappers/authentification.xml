@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="Login">
+	<select id="_0001" resultType="com.rest.api.object.Account">
+		SELECT Permition
+		FROM EPASSV2.Users
+		WHERE Identify = #{Identify}
+		AND Password = PASSWORD(#{Password})
+	</select>
+</mapper>
