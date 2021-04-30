@@ -76,15 +76,35 @@
   </head>
   <body class="text-center" style="background-image: url('assets/img/BackGround.png');background-size:cover">
 	<main class="form-signin">
-	  <button class="w-100 btn btn-lg btn-primary mb-3" onClick="javascript:start()">Start Management</button>
-	  <button class="w-100 btn btn-lg btn-primary mb-3" onClick="javascript:warning()">Contact Us</button>
-	  <button class="w-100 btn btn-lg btn-primary" onClick="javascript:logout()">Logout</button>
+		<div class="row">
+			<div class="col-md-12">
+				<button class="w-100 btn btn-lg btn-primary mb-3" onClick="javascript:start()">Start Management</button>
+			</div>
+		</div>
+	  <div class="row">
+	  	<div class="col-md-6">
+	  		<button class="w-100 h-100 btn btn-lg btn-primary mb-3" onClick="javascript:download()">Download Plugin</button>
+	  	</div>
+	  	<div class="col-md-6">
+	  		<button class="w-100 h-100 btn btn-lg btn-primary mb-3" onClick="javascript:warning()">Contact Us</button>
+	  	</div>
+	  </div>
+	  <div class="row mt-3">
+	  	<div class="col-md-12">
+				<button class="w-100 btn btn-lg btn-primary" onClick="javascript:logout()">Logout</button>
+		</div>
+	  </div>
 	</main>
   </body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script type="text/javascript">
 	  function start(){
-			window.location.href = "epass://" + window.location.host + "/${JSESSIONID}/${level}"
+		  window.location.href = "epass://" + window.location.host + "/${JSESSIONID}/${level}";
+			
+	  }
+	  
+	  function download(){
+		  window.location.href = "assets/pg/ePassInstaller.msi";
 	  }
 	  
 	  function warning(){

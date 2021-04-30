@@ -14,6 +14,7 @@ import com.rest.api.datahandler.DataHandler;
 import com.rest.api.object.Company;
 import com.rest.api.object.Employee;
 import com.rest.api.object.EmployeeOmit;
+import com.rest.api.object.EmployeeShow;
 import com.rest.api.object.EpassCard;
 import com.rest.api.object.Resource;
 import com.rest.api.object.keyDict;
@@ -501,5 +502,10 @@ public class DataService implements DataServiceIface{
 		}
 		
 		return r;
+	}
+	
+	@Override
+	public EmployeeShow GetUserInfo(int n) throws Exception{
+		return dHandler.GetUserInfo(n);
 	}
 }

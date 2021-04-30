@@ -146,4 +146,37 @@
 		Company = ${Company}, Nationality = #{Nationality}, DateOfSIC = #{DateOfSIC}, Remark = #{Remark}
 		WHERE PassNo = ${PassNo}
 	</update>
+	
+	<select id="_0021" resultType="com.rest.api.object.EmployeeShow">
+		SELECT A.PassNo, 
+		A.Name, 
+		A.Mobile, 
+		A.Occupation, 
+		A.Email, 
+		A.NRIC, 
+		B.keyName AS Category, 
+		C.Name AS Company, 
+		A.Nationality,
+		IFNULL(A.DateOfSIC, "") AS DateOfSIC,
+			(
+			CASE
+				WHEN A.CSOC = 0 THEN "No"
+				WHEN A.CSOC = 1 THEN "Yes"
+			END
+			) AS CSOC,
+		IFNULL(A.CSOC_ExpireDate, "") AS CSOC_ExpireDate,
+		A.Remark,
+		D.keyName AS AdditionalCourse,
+		IFNULL(A.AdditionalCourseFrom, "") AS AdditionalCourseFrom,
+		IFNULL(A.AdditionalCourseTo, "") AS AdditionalCourseTo,
+		(SELECT pKey FROM `Users.Files` WHERE User = ${PassNo}) AS Profile
+		FROM `Users` AS A
+		LEFT JOIN `Users.Category` AS B
+		ON A.Category = B.pKey
+		LEFT JOIN `Users.Company` AS C
+		ON A.Company = C.pKey
+		LEFT JOIN `Users.AdditionalCourse` AS D
+		ON A.AdditionalCourse = D.pKey
+		WHERE A.PassNo = ${PassNo}
+	</select>
 </mapper>

@@ -13,6 +13,7 @@ import com.rest.api.object.Account;
 import com.rest.api.object.Company;
 import com.rest.api.object.Employee;
 import com.rest.api.object.EmployeeOmit;
+import com.rest.api.object.EmployeeShow;
 import com.rest.api.object.EpassCard;
 import com.rest.api.object.Resource;
 import com.rest.api.object.keyDict;
@@ -157,5 +158,12 @@ public class DataHandler implements DataHandlerIface{
 	@Override
 	public int EditUser(Employee employee) throws Exception{
 		return sql.insert("Data._0020",employee);
+	}
+	
+	@Override
+	public EmployeeShow GetUserInfo(int PassNo) throws Exception{
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("PassNo", PassNo);
+		return sql.selectOne("Data._0021", p);
 	}
 }

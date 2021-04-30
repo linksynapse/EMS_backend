@@ -5,6 +5,7 @@ import java.util.Map;
 import com.rest.api.object.Account;
 import com.rest.api.object.Company;
 import com.rest.api.object.Employee;
+import com.rest.api.object.EmployeeShow;
 import com.rest.api.object.Resource;
 
 public interface DataServiceIface {
@@ -28,4 +29,5 @@ public interface DataServiceIface {
 	Map<String, Object> GetEpassInfo(int PassNo) throws Exception;
 	Map<String, Object> DeleteUserPhoto(int PassNo) throws Exception;
 	Map<String, Object> EditUser(Employee employee) throws Exception;
+	EmployeeShow GetUserInfo(int n) throws Exception;
 }
