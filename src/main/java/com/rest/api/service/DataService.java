@@ -269,7 +269,7 @@ public class DataService implements DataServiceIface{
 		
 
 	public static String formatDate(String inDate) {
-		SimpleDateFormat inSDF = new SimpleDateFormat("dd/mm/yyyy");
+		SimpleDateFormat inSDF = new SimpleDateFormat("mm/dd/yyyy");
 		SimpleDateFormat outSDF = new SimpleDateFormat("yyyy-mm-dd");
 		
 	    String outDate = "";
