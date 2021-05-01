@@ -1,7 +1,10 @@
 package com.rest.api.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -263,8 +266,32 @@ public class DataService implements DataServiceIface{
 		return r;
 	}
 	
+		
+
+	public static String formatDate(String inDate) {
+		SimpleDateFormat inSDF = new SimpleDateFormat("dd/mm/yyyy");
+		SimpleDateFormat outSDF = new SimpleDateFormat("yyyy-mm-dd");
+		
+	    String outDate = "";
+	    
+	    if (inDate != null) {
+	        try {
+	            Date date = inSDF.parse(inDate);
+	            outDate = outSDF.format(date);
+	        } catch (ParseException ex){
+	        	return inDate;
+	        }
+	    }
+	    return outDate;
+	}
+	
 	@Override
 	public Map<String, Object> CreateEmployee(Employee employee) throws Exception{
+		employee.setDateOfSIC(formatDate(employee.getDateOfSIC()));
+		employee.setCSOC_ExpireDate(formatDate(employee.getCSOC_ExpireDate()));
+		employee.setAdditionalCourseFrom(formatDate(employee.getAdditionalCourseFrom()));
+		employee.setAdditionalCourseTo(formatDate(employee.getAdditionalCourseTo()));
+		
 		Map<String, Object> r = new HashMap<String, Object>();
 		int vo = dHandler.CreateEmployee(employee);
 		
@@ -477,6 +504,11 @@ public class DataService implements DataServiceIface{
 	
 	@Override
 	public Map<String, Object> EditUser(Employee employee) throws Exception {
+		employee.setDateOfSIC(formatDate(employee.getDateOfSIC()));
+		employee.setCSOC_ExpireDate(formatDate(employee.getCSOC_ExpireDate()));
+		employee.setAdditionalCourseFrom(formatDate(employee.getAdditionalCourseFrom()));
+		employee.setAdditionalCourseTo(formatDate(employee.getAdditionalCourseTo()));
+		
 		Map<String, Object> r = new HashMap<String, Object>();
 		
 		int vo = dHandler.EditUser(employee);
