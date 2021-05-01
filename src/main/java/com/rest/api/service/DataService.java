@@ -285,6 +285,23 @@ public class DataService implements DataServiceIface{
 	    return outDate;
 	}
 	
+	public static String ReverseformatDate(String inDate) {
+		SimpleDateFormat outSDF = new SimpleDateFormat("dd/mm/yyyy");
+		SimpleDateFormat inSDF = new SimpleDateFormat("yyyy-mm-dd");
+		
+	    String outDate = "";
+	    
+	    if (inDate != null) {
+	        try {
+	            Date date = inSDF.parse(inDate);
+	            outDate = outSDF.format(date);
+	        } catch (ParseException ex){
+	        	return inDate;
+	        }
+	    }
+	    return outDate;
+	}
+	
 	@Override
 	public Map<String, Object> CreateEmployee(Employee employee) throws Exception{
 		employee.setDateOfSIC(formatDate(employee.getDateOfSIC()));
@@ -463,6 +480,7 @@ public class DataService implements DataServiceIface{
 		Map<String, Object> r = new HashMap<String, Object>();
 		
 		EpassCard vo = dHandler.GetEpassInfo(PassNo);
+		vo.setDateOfSIC(ReverseformatDate(vo.getDateOfSIC()));
 		
 		if(vo != null) {
 			ArrayList<EpassCard> dataArray = new ArrayList<EpassCard>();
