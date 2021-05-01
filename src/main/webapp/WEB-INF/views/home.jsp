@@ -77,7 +77,7 @@
   <body class="text-center" style="background-image: url('assets/img/BackGround.png');background-size:cover">
 	<main class="form-signin">
 	  <form>
-	    <img class="mb-4" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+	    <img class="mb-4" src="assets/img/logo.png" alt="" width="256" height="144">
 	    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 	
 	    <div class="form-floating">
@@ -90,7 +90,7 @@
 	    </div>
 	
 	    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-	    <p class="mt-5 mb-3 text-muted">&copy; 2021. BLUZEN PTE., LTD.<br>all rights reserved</p>
+	    <p class="mt-5 mb-3 text-muted">&copy; 2021. SDK CONSORTIUM
 	  </form>
 	</main>
   </body>
