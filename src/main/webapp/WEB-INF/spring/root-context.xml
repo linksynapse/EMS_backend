@@ -44,7 +44,7 @@
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
 	        <!-- one of the properties available; the maximum file size in bytes ( 30 MB ) -->
-	        <property name="maxUploadSize" value="31457280"/>
+	        <property name="maxUploadSize" value="314572800"/>
 	</bean>
     
     <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
