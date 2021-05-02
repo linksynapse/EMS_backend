@@ -169,7 +169,7 @@
 		D.keyName AS AdditionalCourse,
 		IFNULL(A.AdditionalCourseFrom, "") AS AdditionalCourseFrom,
 		IFNULL(A.AdditionalCourseTo, "") AS AdditionalCourseTo,
-		(SELECT pKey FROM `Users.Files` WHERE User = ${PassNo} ContentsCategory = 1) AS Profile
+		(SELECT pKey FROM `Users.Files` WHERE User = ${PassNo} AND ContentsCategory = 1) AS Profile
 		FROM `Users` AS A
 		LEFT JOIN `Users.Category` AS B
 		ON A.Category = B.pKey
