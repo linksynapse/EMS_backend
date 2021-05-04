@@ -195,4 +195,11 @@ public class AjaxController {
 		Map<String, Object> r = dService.DeleteUserPhoto(PassNo);
 		return r;
 	}
+	
+	@RequestMapping(value = "/update/deleteUserDocument", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> DeleteUserDocument(@RequestParam(defaultValue="")int PassNo) throws Exception{
+		
+		Map<String, Object> r = dService.DeleteUserDocument(PassNo);
+		return r;
+	}
 }

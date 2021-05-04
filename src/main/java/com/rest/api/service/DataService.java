@@ -521,6 +521,24 @@ public class DataService implements DataServiceIface{
 	}
 	
 	@Override
+	public Map<String, Object> DeleteUserDocument(int PassNo) throws Exception {
+		Map<String, Object> r = new HashMap<String, Object>();
+		
+		int vo = dHandler.DeleteDocument(PassNo);
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("rows", vo);
+			
+		ArrayList<Map<String, Object>> dataArray = new ArrayList<Map<String, Object>>();
+		dataArray.add(data);
+			
+		r.put("return", 0);
+		r.put("data", dataArray);
+		
+		return r;
+	}
+	
+	@Override
 	public Map<String, Object> EditUser(Employee employee) throws Exception {
 		employee.setDateOfSIC(formatDate(employee.getDateOfSIC()));
 		employee.setCSOC_ExpireDate(formatDate(employee.getCSOC_ExpireDate()));

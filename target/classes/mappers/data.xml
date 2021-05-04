@@ -32,13 +32,13 @@
 		Category,
 		Company,
 		IFNULL(Nationality, "") AS Nationality,
-		IFNULL(DateOfSIC, "") AS DateOfSIC,
+		IFNULL(DATE_FORMAT(DateOfSIC, "%d/%m/%Y"), "") AS DateOfSIC,
 		CSOC,
-		IFNULL(CSOC_ExpireDate, "") AS CSOC_ExpireDate,
+		IFNULL(DATE_FORMAT(CSOC_ExpireDate, "%d/%m/%Y"), "") AS CSOC_ExpireDate,
 		IFNULL(Remark, "") AS Remark,
 		AdditionalCourse,
-		IFNULL(AdditionalCourseFrom, "") AS AdditionalCourseFrom,
-		IFNULL(AdditionalCourseTo, "") AS AdditionalCourseTo
+		IFNULL(DATE_FORMAT(AdditionalCourseFrom, "%d/%m/%Y"), "") AS AdditionalCourseFrom,
+		IFNULL(DATE_FORMAT(AdditionalCourseTo, "%d/%m/%Y"), "") AS AdditionalCourseTo
 		FROM `Users`
 		WHERE PassNo = ${PassNo}
 	</select>
@@ -143,7 +143,7 @@
 	
 	<update id="_0020">
 		UPDATE `Users` SET Permition = ${CompanyRole}, Name = #{Name}, Mobile = #{Mobile}, Occupation = #{Occupation}, Email = #{Email}, NRIC = #{NRIC}, Category = ${Category},
-		Company = ${Company}, Nationality = #{Nationality}, DateOfSIC = #{DateOfSIC}, Remark = #{Remark}
+		Company = ${Company}, Nationality = #{Nationality}, DateOfSIC = #{DateOfSIC}, Remark = #{Remark}, CSOC = ${CSOC}, CSOC_ExpireDate = #{CSOC_ExpireDate}, AdditionalCourse = ${AdditionalCourse}, AdditionalCourseFrom = #{AdditionalCourseFrom}, AdditionalCourseTo = #{AdditionalCourseTo}
 		WHERE PassNo = ${PassNo}
 	</update>
 	
@@ -164,11 +164,11 @@
 				WHEN A.CSOC = 1 THEN "Yes"
 			END
 			) AS CSOC,
-		IFNULL(A.CSOC_ExpireDate, "") AS CSOC_ExpireDate,
+		IFNULL(DATE_FORMAT(A.CSOC_ExpireDate, "%d/%m/%Y"), "") AS CSOC_ExpireDate,
 		A.Remark,
 		D.keyName AS AdditionalCourse,
-		IFNULL(A.AdditionalCourseFrom, "") AS AdditionalCourseFrom,
-		IFNULL(A.AdditionalCourseTo, "") AS AdditionalCourseTo,
+		IFNULL(DATE_FORMAT(A.AdditionalCourseFrom, "%d/%m/%Y"), "") AS AdditionalCourseFrom,
+		IFNULL(DATE_FORMAT(A.AdditionalCourseTo, "%d/%m/%Y"), "") AS AdditionalCourseTo,
 		(SELECT pKey FROM `Users.Files` WHERE User = ${PassNo} AND ContentsCategory = 1) AS Profile
 		FROM `Users` AS A
 		LEFT JOIN `Users.Category` AS B
@@ -179,4 +179,8 @@
 		ON A.AdditionalCourse = D.pKey
 		WHERE A.PassNo = ${PassNo}
 	</select>
+	
+	<delete id="_0022">
+		DELETE FROM `Users.Files` WHERE User = ${PassNo} AND ContentsCategory = 0
+	</delete>
 </mapper>

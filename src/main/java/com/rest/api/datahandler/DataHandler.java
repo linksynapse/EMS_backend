@@ -166,4 +166,11 @@ public class DataHandler implements DataHandlerIface{
 		p.put("PassNo", PassNo);
 		return sql.selectOne("Data._0021", p);
 	}
+	
+	@Override
+	public int DeleteDocument(int PassNo) throws Exception{
+		Map<String, Object> p = new HashMap<String,Object>();
+		p.put("PassNo",PassNo);
+		return sql.delete("Data._0022", p);
+	}
 }

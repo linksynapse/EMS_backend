@@ -30,4 +30,5 @@ public interface DataServiceIface {
 	Map<String, Object> DeleteUserPhoto(int PassNo) throws Exception;
 	Map<String, Object> EditUser(Employee employee) throws Exception;
 	EmployeeShow GetUserInfo(int n) throws Exception;
+	Map<String, Object> DeleteUserDocument(int PassNo) throws Exception;
 }
