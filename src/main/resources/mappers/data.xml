@@ -187,4 +187,9 @@
 	<delete id="_0023">
 		DELETE FROM `Users.Files` WHERE UserNRIC = #{NRIC} AND ContentsCategory = 1
 	</delete>
+	
+	<insert id="_0024">
+		INSERT INTO `Users` (Name, NRIC, Mobile, Occupation, Nationality, Category, DateOfSIC, Company)
+		VALUES (#{Name}, #{NRIC}, #{Mobile}, #{Occupation}, #{Nationality}, ${Category}, #{DateOfSIC}, ${Company})
+	</insert>
 </mapper>

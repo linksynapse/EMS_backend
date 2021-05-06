@@ -5,6 +5,7 @@ import java.util.Map;
 import com.rest.api.object.Account;
 import com.rest.api.object.Company;
 import com.rest.api.object.Employee;
+import com.rest.api.object.EmployeeShoutCut;
 import com.rest.api.object.EmployeeShow;
 import com.rest.api.object.Resource;
 
@@ -32,4 +33,5 @@ public interface DataServiceIface {
 	EmployeeShow GetUserInfo(int n) throws Exception;
 	Map<String, Object> DeleteUserDocument(int PassNo) throws Exception;
 	Map<String, Object> ModifyImage(String NRIC, String Image) throws Exception;
+	Map<String, Object> CreateEmployeeBulk(EmployeeShoutCut employee) throws Exception;
 }

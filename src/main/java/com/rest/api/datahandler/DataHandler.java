@@ -13,6 +13,7 @@ import com.rest.api.object.Account;
 import com.rest.api.object.Company;
 import com.rest.api.object.Employee;
 import com.rest.api.object.EmployeeOmit;
+import com.rest.api.object.EmployeeShoutCut;
 import com.rest.api.object.EmployeeShow;
 import com.rest.api.object.EpassCard;
 import com.rest.api.object.Resource;
@@ -179,5 +180,10 @@ public class DataHandler implements DataHandlerIface{
 		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("NRIC", NRIC);
 		return sql.delete("Data._0023",p);
+	}
+	
+	@Override
+	public int CreateBulkEmployee(EmployeeShoutCut employee) {
+		return sql.insert("Data._0024", employee);
 	}
 }

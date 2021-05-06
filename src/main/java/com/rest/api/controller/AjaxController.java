@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rest.api.object.Company;
 import com.rest.api.object.Employee;
+import com.rest.api.object.EmployeeShoutCut;
 import com.rest.api.object.Resource;
 import com.rest.api.service.DataService;
 
@@ -208,6 +209,12 @@ public class AjaxController {
 			@RequestParam(defaultValue="")String imgdata) throws Exception{
 		
 		Map<String, Object> r = dService.ModifyImage(NRIC, imgdata);
+		return r;
+	}
+	
+	@RequestMapping(value = "/update/createEmployeeBulk", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> ModifyUserPhoto(EmployeeShoutCut employee) throws Exception{
+		Map<String, Object> r = dService.CreateEmployeeBulk(employee);
 		return r;
 	}
 }

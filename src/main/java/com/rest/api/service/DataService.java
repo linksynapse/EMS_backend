@@ -17,6 +17,7 @@ import com.rest.api.datahandler.DataHandler;
 import com.rest.api.object.Company;
 import com.rest.api.object.Employee;
 import com.rest.api.object.EmployeeOmit;
+import com.rest.api.object.EmployeeShoutCut;
 import com.rest.api.object.EmployeeShow;
 import com.rest.api.object.EpassCard;
 import com.rest.api.object.Resource;
@@ -452,6 +453,35 @@ public class DataService implements DataServiceIface{
 		
 		return r;
 	}
+	
+	@Override
+	public Map<String, Object> CreateEmployeeBulk(EmployeeShoutCut employee) throws Exception {
+		Map<String, Object> r = new HashMap<String, Object>();
+		employee.setDateOfSIC(formatDate(employee.getDateOfSIC()));
+		int vo = dHandler.CreateBulkEmployee(employee);
+		
+		if(vo != 0) {
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("rows", vo);
+			
+			ArrayList<Map<String, Object>> dataArray = new ArrayList<Map<String, Object>>();
+			dataArray.add(data);
+			
+			r.put("return", 0);
+			r.put("data", dataArray);
+		} else {
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("msg", "no record");
+			
+			ArrayList<Map<String, Object>> dataArray = new ArrayList<Map<String, Object>>();
+			dataArray.add(data);
+			
+			r.put("return", -1);
+			r.put("data", dataArray);
+		}
+		
+		return r;
+	}
 
 	@Override
 	public Resource GetResource(int Idx) throws Exception{
@@ -510,23 +540,12 @@ public class DataService implements DataServiceIface{
 		
 		EpassCard vo = dHandler.GetEpassInfo(PassNo);
 		vo.setDateOfSIC(ReverseformatDate(vo.getDateOfSIC()));
-		
-		if(vo != null) {
-			ArrayList<EpassCard> dataArray = new ArrayList<EpassCard>();
-			dataArray.add(vo);
+
+		ArrayList<EpassCard> dataArray = new ArrayList<EpassCard>();
+		dataArray.add(vo);
 			
-			r.put("return", 0);
-			r.put("data", dataArray);
-		} else {
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("msg", "no record");
-			
-			ArrayList<Map<String, Object>> dataArray = new ArrayList<Map<String, Object>>();
-			dataArray.add(data);
-			
-			r.put("return", -1);
-			r.put("data", dataArray);
-		}
+		r.put("return", 0);
+		r.put("data", dataArray);
 		
 		return r;
 	}

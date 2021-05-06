@@ -5,6 +5,7 @@ import java.util.List;
 import com.rest.api.object.Company;
 import com.rest.api.object.Employee;
 import com.rest.api.object.EmployeeOmit;
+import com.rest.api.object.EmployeeShoutCut;
 import com.rest.api.object.EmployeeShow;
 import com.rest.api.object.EpassCard;
 import com.rest.api.object.Resource;
@@ -34,4 +35,5 @@ public interface DataHandlerIface {
 	EmployeeShow GetUserInfo(int PassNo) throws Exception;
 	int DeleteDocument(int PassNo) throws Exception;
 	int DeleteUserPhotoByNRIC(String NRIC) throws Exception;
+	int CreateBulkEmployee(EmployeeShoutCut employee);
 }
