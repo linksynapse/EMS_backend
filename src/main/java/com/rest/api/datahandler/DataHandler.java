@@ -173,4 +173,11 @@ public class DataHandler implements DataHandlerIface{
 		p.put("PassNo",PassNo);
 		return sql.delete("Data._0022", p);
 	}
+	
+	@Override
+	public int DeleteUserPhotoByNRIC(String NRIC) throws Exception{
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("NRIC", NRIC);
+		return sql.delete("Data._0023",p);
+	}
 }

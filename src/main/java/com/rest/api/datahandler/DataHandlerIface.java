@@ -33,4 +33,5 @@ public interface DataHandlerIface {
 	int EditUser(Employee employee) throws Exception;
 	EmployeeShow GetUserInfo(int PassNo) throws Exception;
 	int DeleteDocument(int PassNo) throws Exception;
+	int DeleteUserPhotoByNRIC(String NRIC) throws Exception;
 }

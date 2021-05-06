@@ -202,4 +202,12 @@ public class AjaxController {
 		Map<String, Object> r = dService.DeleteUserDocument(PassNo);
 		return r;
 	}
+	
+	@RequestMapping(value = "/update/modifyUserPhoto", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> ModifyUserPhoto(@RequestParam(defaultValue="")String NRIC,
+			@RequestParam(defaultValue="")String imgdata) throws Exception{
+		
+		Map<String, Object> r = dService.ModifyImage(NRIC, imgdata);
+		return r;
+	}
 }

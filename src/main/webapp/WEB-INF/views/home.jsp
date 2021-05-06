@@ -80,7 +80,7 @@
 	    <img class="mb-4" src="assets/img/logo.png" alt="" width="256" height="144">
 	    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 	
-	    <div class="form-floating">
+	    <div class="form-floating mb-2">
 	      <input type="text" class="form-control" id="Identify" name="Identify" placeholder="identify">
 	      <label for="Identify">Identify</label>
 	    </div>
@@ -90,12 +90,18 @@
 	    </div>
 	
 	    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-	    <p class="mt-5 mb-3 text-muted">&copy; 2021. SDK CONSORTIUM
+	    
 	  </form>
+	  <button class="w-100 h-100 btn btn-lg btn-primary mt-3" onClick="javascript:warning()">Contact Us</button>
+	  <p class="mt-5 mb-3 text-muted">&copy; 2021. SDK CONSORTIUM</p>
 	</main>
   </body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script type="text/javascript">
+  function warning(){
+		alert("For information!\r\nPlease Contact to SDK HSE Department\r\nMr.Masum | Email: masum@sdkss.sg");
+}
+  
   $(document).ready(function () {
 	  $("form").submit(function (event) {
 	    var formData = {

@@ -183,4 +183,8 @@
 	<delete id="_0022">
 		DELETE FROM `Users.Files` WHERE User = ${PassNo} AND ContentsCategory = 0
 	</delete>
+	
+	<delete id="_0023">
+		DELETE FROM `Users.Files` WHERE UserNRIC = #{NRIC} AND ContentsCategory = 1
+	</delete>
 </mapper>
