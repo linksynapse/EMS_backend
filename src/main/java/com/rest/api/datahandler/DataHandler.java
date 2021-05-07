@@ -15,6 +15,7 @@ import com.rest.api.object.Employee;
 import com.rest.api.object.EmployeeOmit;
 import com.rest.api.object.EmployeeShoutCut;
 import com.rest.api.object.EmployeeShow;
+import com.rest.api.object.EmployeeWholeString;
 import com.rest.api.object.EpassCard;
 import com.rest.api.object.Resource;
 import com.rest.api.object.keyDict;
@@ -185,5 +186,10 @@ public class DataHandler implements DataHandlerIface{
 	@Override
 	public int CreateBulkEmployee(EmployeeShoutCut employee) {
 		return sql.insert("Data._0024", employee);
+	}
+	
+	@Override
+	public List<EmployeeWholeString> GetWholeEmployee(){
+		return sql.selectList("Data._0025");
 	}
 }

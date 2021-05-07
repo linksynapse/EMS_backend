@@ -16,10 +16,24 @@
        <mapping path="/inform/getEmployeeOmit"/>
        <mapping path="/inform/getTypeOfWork"/>
        <mapping path="/inform/getCompanyRole"/>
+       <mapping path="/inform/getCategory"/>
        <mapping path="/inform/getAdditionalCourse"/>
        <mapping path="/update/CreateCompany"/>
        <mapping path="/update/deleteCompany"/>
        <mapping path="/update/modifyCompany"/>
+       <mapping path="/update/createEmployee"/>
+       <mapping path="/update/modifyEmployee"/>
+       <mapping path="/update/deleteEmployee"/>
+       <mapping path="/upload/imgUpload"/>
+       <mapping path="/upload/uploadFile"/>
+       <mapping path="/inform/profileimg"/>
+       <mapping path="/inform/document"/>
+       <mapping path="/inform/epass"/>
+       <mapping path="/update/deleteUserPhoto"/>
+       <mapping path="/update/deleteUserDocument"/>
+       <mapping path="/update/modifyUserPhoto"/>
+       <mapping path="/update/createEmployeeBulk"/>
+       <mapping path="/inform/getEmployeeString"/>
        <beans:bean id="commonInterceptor" class="com.rest.api.controller.AuthInterceptor"/>
        </interceptor>
     </interceptors>

@@ -217,4 +217,10 @@ public class AjaxController {
 		Map<String, Object> r = dService.CreateEmployeeBulk(employee);
 		return r;
 	}
+	
+	@RequestMapping(value = "/inform/getEmployeeString", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> GetEmployeeWHole() throws Exception{
+		Map<String, Object> r = dService.GetWholeEmployee();
+		return r;
+	}
 }

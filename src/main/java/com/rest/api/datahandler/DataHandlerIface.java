@@ -7,6 +7,7 @@ import com.rest.api.object.Employee;
 import com.rest.api.object.EmployeeOmit;
 import com.rest.api.object.EmployeeShoutCut;
 import com.rest.api.object.EmployeeShow;
+import com.rest.api.object.EmployeeWholeString;
 import com.rest.api.object.EpassCard;
 import com.rest.api.object.Resource;
 import com.rest.api.object.keyDict;
@@ -36,4 +37,5 @@ public interface DataHandlerIface {
 	int DeleteDocument(int PassNo) throws Exception;
 	int DeleteUserPhotoByNRIC(String NRIC) throws Exception;
 	int CreateBulkEmployee(EmployeeShoutCut employee);
+	List<EmployeeWholeString> GetWholeEmployee();
 }

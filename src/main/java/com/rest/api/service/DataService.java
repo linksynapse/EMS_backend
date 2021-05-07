@@ -19,6 +19,7 @@ import com.rest.api.object.Employee;
 import com.rest.api.object.EmployeeOmit;
 import com.rest.api.object.EmployeeShoutCut;
 import com.rest.api.object.EmployeeShow;
+import com.rest.api.object.EmployeeWholeString;
 import com.rest.api.object.EpassCard;
 import com.rest.api.object.Resource;
 import com.rest.api.object.keyDict;
@@ -629,17 +630,11 @@ public class DataService implements DataServiceIface{
 	public Map<String, Object> GetWholeEmployee(){
 Map<String, Object> r = new HashMap<String, Object>();
 		
-		int vo = 2;
+		List<EmployeeWholeString> vo = dHandler.GetWholeEmployee();
 		
-		if(vo != 0) {
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("rows", vo);
-			
-			ArrayList<Map<String, Object>> dataArray = new ArrayList<Map<String, Object>>();
-			dataArray.add(data);
-			
+		if(vo != null) {	
 			r.put("return", 0);
-			r.put("data", dataArray);
+			r.put("data", vo);
 		} else {
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("msg", "no record");

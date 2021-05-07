@@ -192,4 +192,28 @@
 		INSERT INTO `Users` (Name, NRIC, Mobile, Occupation, Nationality, Category, DateOfSIC, Company)
 		VALUES (#{Name}, #{NRIC}, #{Mobile}, #{Occupation}, #{Nationality}, ${Category}, #{DateOfSIC}, ${Company})
 	</insert>
+	
+	<select id="_0025" resultType="com.rest.api.object.EmployeeWholeString">
+		SELECT A.PassNo, E.keyName AS CompanyRole, A.Name, A.Mobile, 
+		A.Occupation, A.Email, A.NRIC, C.keyName AS Category, 
+		D.Name AS Company, A.Nationality, 
+		IFNULL(DATE_FORMAT(A.DateOfSIC, "%d/%m/%Y"), "") AS DateOfSIC, 
+		(
+					CASE
+						WHEN A.CSOC = 0 THEN "No"
+						WHEN A.CSOC = 1 THEN "Yes"
+					END
+		) AS CSOC,
+		IFNULL(DATE_FORMAT(A.CSOC_ExpireDate, "%d/%m/%Y"), "") AS CSOC_ExpireDate, A.Remark, B.keyName AS AdditionalCourse, 
+		IFNULL(DATE_FORMAT(A.AdditionalCourseFrom, "%d/%m/%Y"), "") AS AdditionalCourseFrom , IFNULL(DATE_FORMAT(A.AdditionalCourseTo, "%d/%m/%Y"), "") AS AdditionalCourseTo 
+		FROM `Users` AS A
+		LEFT JOIN `Users.AdditionalCourse` AS B
+		ON A.AdditionalCourse = B.pKey
+		LEFT JOIN `Users.Category` AS C
+		ON A.Category  = C.pKey
+		LEFT JOIN `Users.Company` AS D
+		ON A.Company = D.pKey
+		LEFT JOIN `Users.Permit` AS E
+		ON A.Permition = E.pKey 
+	</select>
 </mapper>
