@@ -624,4 +624,33 @@ public class DataService implements DataServiceIface{
 	public EmployeeShow GetUserInfo(int n) throws Exception{
 		return dHandler.GetUserInfo(n);
 	}
+	
+	@Override
+	public Map<String, Object> GetWholeEmployee(){
+Map<String, Object> r = new HashMap<String, Object>();
+		
+		int vo = 2;
+		
+		if(vo != 0) {
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("rows", vo);
+			
+			ArrayList<Map<String, Object>> dataArray = new ArrayList<Map<String, Object>>();
+			dataArray.add(data);
+			
+			r.put("return", 0);
+			r.put("data", dataArray);
+		} else {
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("msg", "no record");
+			
+			ArrayList<Map<String, Object>> dataArray = new ArrayList<Map<String, Object>>();
+			dataArray.add(data);
+			
+			r.put("return", -1);
+			r.put("data", dataArray);
+		}
+		
+		return r;
+	}
 }
